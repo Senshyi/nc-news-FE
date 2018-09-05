@@ -1,35 +1,78 @@
 import React, { Component } from 'react';
+import ArticleCard from './ArticleCard';
+import Modal from 'react-modal';
+import * as api from '../api';
 
 class Articles extends Component {
   state = {
-    articles: []
+    articles: [],
+    modalIsOpen: false,
+    selectedArticle: {}
   }
   render() {
     return (
       <div className='articles'>
           {this.state.articles.map((article, i) => {
-            console.log(article)
-            return <div className='single-article' key={i}>
-              <div className='article-votes'>
-                <span>{article.votes}</span>
-              </div>
-              <div className='article-preview'>
-                <h3>{article.title}</h3>
-                <p>{article.belongs_to}</p>
-                <p>{article.topic}</p>
-                <p>{article.comments}</p>
-              </div>
+          return <div className='single-article' key={i} onClick={() => this.openModal(article)}>
+            <div className='article-votes'>
+              <span>{article.votes}</span>
             </div>
+            <div className='article-preview'>
+              <h3>{article.title}</h3>
+              <p>{article.belongs_to}</p>
+              <p>{article.topic}</p>
+              <p onClick={this.handleCommentClick}>{article.comments}</p>
+            </div>
+          </div>
           })}
+        <Modal isOpen={this.state.modalIsOpen} >
+          <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser}/>
+        </Modal>
       </div>
     );
   }
 
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
+
   componentDidMount = () => {
-    console.log(this.props.match)
-    fetch('https://jan-nc-news.herokuapp.com/api/articles')
-      .then(res => res.json())
-      .then(({articles}) => this.setState({articles}))
+    this.handleFetchArticles()
+  }
+
+  componentDidUpdate = (prevProps) => {
+    if(prevProps !== this.props) {
+      this.handleFetchArticles()
+    }
+  }
+
+  openModal = (article) => {
+    this.setState({ 
+      modalIsOpen: true,
+      selectedArticle: article
+    });
+  }
+
+  closeModal = () => {
+    this.setState({ 
+      modalIsOpen: false,
+      selectedArticle: {}
+    });
+  }
+
+  handleCommentClick = () => {
+    
+  }
+
+  handleFetchArticles = () => {
+      const { topic } = this.props.match.params;
+      if(topic) {
+        api.fetchTopicArticles(topic)
+          .then(({ articles }) => this.setState({ articles }))
+      } else {
+        api.fetchArticles()
+          .then(({ articles }) => this.setState({ articles }))
+      }
   }
 }
 

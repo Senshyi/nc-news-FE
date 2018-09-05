@@ -1,9 +1,18 @@
 import React from 'react';
+import AddComment from './AddComment'
+import Comments from './Comments';
 
-const ArticleCard = () => {
+const ArticleCard = ({close, article, loggedUser}) => {
   return (
     <div>
-      <h1>Article Card</h1>
+      <span onClick={close}>X</span>
+      <h1>{article.title}</h1>
+      <p>{article.topic}</p>
+      <p>{article.belongs_to}</p>
+      <p>{article.body}</p>
+      <AddComment user={loggedUser} articleId={article._id}/>
+      <h3>Comments:</h3>
+      <Comments articleId={article._id}/>
     </div>
   );
 };
