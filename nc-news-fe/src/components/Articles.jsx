@@ -6,9 +6,20 @@ class Articles extends Component {
   }
   render() {
     return (
-      <div>
-          {this.state.articles.map(article => {
-            return <div>{article.title}</div>
+      <div className='articles'>
+          {this.state.articles.map((article, i) => {
+            console.log(article)
+            return <div className='single-article' key={i}>
+              <div className='article-votes'>
+                <span>{article.votes}</span>
+              </div>
+              <div className='article-preview'>
+                <h3>{article.title}</h3>
+                <p>{article.belongs_to}</p>
+                <p>{article.topic}</p>
+                <p>{article.comments}</p>
+              </div>
+            </div>
           })}
       </div>
     );
