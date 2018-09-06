@@ -26,7 +26,7 @@ export const fetchUser = (username) => {
 }
 
 export const addComment = (articleId, userId, comment) => {
-  const bodyobj = {
+  const bodyObj = {
     body: comment,
     created_by: userId }
   return fetch(`${DB_URL}/articles/${articleId}/comments`, {
@@ -35,17 +35,34 @@ export const addComment = (articleId, userId, comment) => {
       'Accept': 'application/json, text/plain, */*',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(bodyobj)
+    body: JSON.stringify(bodyObj)
   })
   .then(res => res.json())
 }
 
+export const addArticle = ({topic, body, title}, userId) => {
+  const bodyObj = {
+    body,
+    title,
+    created_by: userId
+  }
+  fetch(`${DB_URL}/topics/${topic}/articles`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bodyObj)
+  })
+}
+
 export const updateVotes = (category, id, vote) => {
-  fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
+  return fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
     method: 'put',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
   })
+  .then(res => res.json())
 }

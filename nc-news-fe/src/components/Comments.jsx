@@ -4,7 +4,7 @@ import Votes from './Votes';
 
 class Comments extends Component {
   state = {
-    comments: []
+    comments: [],
   }
   render() {
     return (

@@ -3,6 +3,7 @@ import ArticleCard from './ArticleCard';
 import Votes from './Votes'
 import Modal from 'react-modal';
 import * as api from '../api';
+import AddArticle from './AddArticle';
 
 class Articles extends Component {
   state = {
@@ -13,6 +14,9 @@ class Articles extends Component {
   render() {
     return (
       <div className='articles'>
+        <div>
+          <button onClick={() => this.openModal({})}>Add new Article</button>
+        </div>
           {this.state.articles.map((article, i) => {
           return <div className='single-article' key={i}>
             <div className='article-votes-card'>
@@ -27,7 +31,11 @@ class Articles extends Component {
           </div>
           })}
         <Modal isOpen={this.state.modalIsOpen} >
-          <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser}/>
+        {
+          Object.keys(this.state.selectedArticle).length === 0 ?
+            <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser} /> :
+            <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} />
+        }
         </Modal>
       </div>
     );

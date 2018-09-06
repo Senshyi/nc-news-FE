@@ -4,10 +4,11 @@ import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import {Route} from 'react-router-dom';
 import Topics from './components/Topics';
+import * as api from './api'
 
 class App extends Component {
   state = {
-    loggedUser: 'jessjelly'
+    loggedUser: {}
   }
   render() {
     return (
@@ -18,6 +19,11 @@ class App extends Component {
         <Route exact path='/' render={({match}) => <Articles match={match} loggedUser={this.state.loggedUser} />} />
       </div>
     );
+  }
+
+  componentDidMount() {
+    api.fetchUser('jessjelly')
+      .then(({user}) => this.setState({loggedUser: user}))
   }
 }
 
