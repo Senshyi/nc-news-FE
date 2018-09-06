@@ -9,7 +9,7 @@ class Articles extends Component {
   state = {
     articles: [],
     modalIsOpen: false,
-    selectedArticle: {}
+    selectedArticle: {},
   }
   render() {
     return (
@@ -20,7 +20,7 @@ class Articles extends Component {
           {this.state.articles.map((article, i) => {
           return <div className='single-article' key={i}>
             <div className='article-votes-card'>
-              <Votes votes={article.votes} id={article._id} category={'articles'}/>
+              <Votes votes={article.votes} id={article._id} category={'articles'} updateVote={this.updateVote}/>
             </div>
             <div className='article-preview' onClick={() => this.openModal(article)}>
               <h3>{article.title}</h3>
@@ -34,7 +34,7 @@ class Articles extends Component {
         {
           Object.keys(this.state.selectedArticle).length === 0 ?
             <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser} /> :
-            <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} />
+              <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} updateVote={this.updateVote}/>
         }
         </Modal>
       </div>
@@ -67,6 +67,17 @@ class Articles extends Component {
       modalIsOpen: false,
       selectedArticle: {}
     });
+  }
+
+  updateVote = (vote, id) => {
+    // const article = this.state.articles.find(article => article._id === id)
+    const articles = this.state.articles.map(article => {
+      if (article._id === id) article.votes = vote;
+      return article
+    })
+    this.setState({
+      articles
+    })
   }
 
   handleCommentClick = () => {

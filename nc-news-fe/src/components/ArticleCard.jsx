@@ -4,12 +4,12 @@ import Comments from './Comments';
 import Votes from './Votes';
 
 
-const ArticleCard = ({close, article, loggedUser}) => {
+const ArticleCard = ({ close, article, loggedUser, updateVote}) => {
   return (
     <div>
       <span onClick={close}>X</span>
       <div className='signle-article-votes'>
-        <Votes votes={article.votes} id={article._id} category={'articles'}/>
+        <Votes votes={article.votes} id={article._id} category={'articles'} updateVote={updateVote}/>
       </div>
       <h1>{article.title}</h1>
       <p>{article.topic}</p>
