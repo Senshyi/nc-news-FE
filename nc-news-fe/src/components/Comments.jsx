@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../api'
+import Votes from './Votes';
 
 class Comments extends Component {
   state = {
@@ -11,7 +12,7 @@ class Comments extends Component {
         {this.state.comments.map((comment, i) => {
           return <div className='single-comment' ref='commentsStart' key={i}>
             <div className='comment-votes'>
-              <span>{comment.votes}</span>
+              <Votes votes={comment.votes} id={comment._id} category={'comments'}/>
             </div>
             <div>
               <p>{comment.created_by.username}</p>

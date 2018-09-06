@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArticleCard from './ArticleCard';
+import Votes from './Votes'
 import Modal from 'react-modal';
 import * as api from '../api';
 
@@ -13,11 +14,11 @@ class Articles extends Component {
     return (
       <div className='articles'>
           {this.state.articles.map((article, i) => {
-          return <div className='single-article' key={i} onClick={() => this.openModal(article)}>
-            <div className='article-votes'>
-              <span>{article.votes}</span>
+          return <div className='single-article' key={i}>
+            <div className='article-votes-card'>
+              <Votes votes={article.votes} id={article._id} category={'articles'}/>
             </div>
-            <div className='article-preview'>
+            <div className='article-preview' onClick={() => this.openModal(article)}>
               <h3>{article.title}</h3>
               <p>{article.belongs_to}</p>
               <p>{article.topic}</p>

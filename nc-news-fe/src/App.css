@@ -8,10 +8,21 @@
   border: 1px solid black;
 }
 
-.article-votes {
+.signle-article-votes {
+  width: 40px;
+  border: 1px solid black;
+}
+
+.article-votes-card {
   width: 40px;
   border-right: 1px solid black;
 }
+
+.votes-component {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .comment-votes {
   width: 40px;

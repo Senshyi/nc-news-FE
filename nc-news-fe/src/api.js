@@ -38,6 +38,14 @@ export const addComment = (articleId, userId, comment) => {
     body: JSON.stringify(bodyobj)
   })
   .then(res => res.json())
-  .then(console.log)
-  .catch(console.log)
+}
+
+export const updateVotes = (category, id, vote) => {
+  fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
+    method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
 }
