@@ -22,7 +22,7 @@ class ArticleCard extends Component {
         <p>{this.props.article.body}</p>
         <AddComment user={this.props.loggedUser} articleId={this.props.article._id} renderNewComment={this.handleNewComment}/>
         <h3>Comments:</h3>
-        <Comments comments={this.state.comments} user={this.props.loggedUser}/>
+        <Comments comments={this.state.comments} user={this.props.loggedUser} removeComment={this.handleCommentDelete}/>
       </div>
     );
   }
@@ -35,8 +35,17 @@ class ArticleCard extends Component {
   }
 
   handleNewComment = (newComment) => {
-    console.log(newComment)
     this.setState({comments: [...this.state.comments, newComment] })
+  }
+
+  handleCommentDelete = (id) => {
+    api.deleteComment(id)
+      .then(({comment}) => {
+        const newComments =  this.state.comments.filter(oldComment => {
+          return oldComment._id !== comment._id
+        })
+        this.setState({comments: newComments})
+      })
   }
 }
 

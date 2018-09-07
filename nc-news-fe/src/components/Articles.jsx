@@ -70,7 +70,6 @@ class Articles extends Component {
   }
 
   updateVote = (vote, id) => {
-    // const article = this.state.articles.find(article => article._id === id)
     const articles = this.state.articles.map(article => {
       if (article._id === id) article.votes = vote;
       return article
@@ -83,10 +82,6 @@ class Articles extends Component {
   handleNewArticleRender = (newArticle) => {
     console.log(newArticle);
     this.setState({ articles: [...this.state.articles, newArticle] })
-  }
-
-  handleCommentClick = () => {
-    
   }
 
   handleFetchArticles = () => {

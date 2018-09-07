@@ -1,8 +1,7 @@
 import React from 'react';
 import Votes from './Votes';
-import * as api from '../api'
 
-const Comments = ({comments, user}) => {
+const Comments = ({ comments, user, removeComment}) => {
   return (
     <div>
       {comments.map((comment, i) => {
@@ -14,7 +13,7 @@ const Comments = ({comments, user}) => {
             <p>{comment.created_by.username}</p>
             <p>timestamp</p>
             <p>{comment.body}</p>
-            {user._id === comment.created_by._id &&<span onClick={() => api.deleteComment(comment._id)}>delete</span>}
+            {user._id === comment.created_by._id && <span onClick={() => removeComment(comment._id)}>delete</span>}
           </div>
         </div>
       })}
