@@ -6,7 +6,8 @@ class AddArticle extends Component {
     newArticle: {
       body: '',
       title: '',
-      topic: this.props.topic
+      topic: this.props.topic,
+      error: {}
     }
   }
 
@@ -37,8 +38,10 @@ class AddArticle extends Component {
   handleSubmit = () => {
     api.addArticle(this.state.newArticle, this.props.loggedUser._id)
       .then(({ article }) => {
-        console.log(article)
         this.props.handlenewArticle(article)
+      })
+      .catch(err => {
+        this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
       })
   }
 

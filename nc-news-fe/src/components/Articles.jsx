@@ -5,42 +5,50 @@ import Modal from 'react-modal';
 import * as api from '../api';
 import AddArticle from './AddArticle';
 import Topics from './Topics';
+import { Redirect } from 'react-router-dom'
 
 class Articles extends Component {
   state = {
     articles: [],
     modalIsOpen: false,
     selectedArticle: {},
+    error: {}
   }
   render() {
-    return (
-      <div className='articles'>
-        <div className='topics-newArticle-div'>
-          <Topics />
-          <button onClick={() => this.openModal({})}>Add new Article</button>
-        </div>
-          {this.state.articles.map((article, i) => {
-          return <div className='single-article' key={i}>
-            <div className='article-votes-card'>
-              <Votes votes={article.votes} id={article._id} category={'articles'} updateVote={this.updateVote}/>
-            </div>
-            <div className='article-preview' onClick={() => this.openModal(article)}>
-              <h3>{article.title}</h3>
-              <p>{article.belongs_to}</p>
-              <p>{article.topic}</p>
-              <p onClick={this.handleCommentClick}>{article.comments}</p>
-            </div>
+    if(this.state.error.err) return <Redirect to={{
+      pathname: '/error',
+      state: this.state.error
+    }} />
+    else {
+      return (
+        <div className='articles'>
+          <div className='topics-newArticle-div'>
+            <Topics />
+            <button onClick={() => this.openModal({})}>Add new Article</button>
           </div>
-          })}
-        <Modal isOpen={this.state.modalIsOpen} >
-        {
-          Object.keys(this.state.selectedArticle).length === 0 ?
-            <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser}  handlenewArticle={this.handleNewArticleRender}/> :
-              <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} updateVote={this.updateVote}/>
-        }
-        </Modal>
-      </div>
-    );
+            {this.state.articles.map((article, i) => {
+            return <div className='single-article' key={i}>
+              <div className='article-votes-card'>
+                <Votes votes={article.votes} id={article._id} category={'articles'} updateVote={this.updateVote}/>
+              </div>
+              <div className='article-preview' onClick={() => this.openModal(article)}>
+                <h3>{article.title}</h3>
+                <p>{article.belongs_to}</p>
+                <p>{article.topic}</p>
+                <p onClick={this.handleCommentClick}>{article.comments}</p>
+              </div>
+            </div>
+            })}
+          <Modal isOpen={this.state.modalIsOpen} >
+          {
+            Object.keys(this.state.selectedArticle).length === 0 ?
+              <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser}  handlenewArticle={this.handleNewArticleRender}/> :
+                <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} updateVote={this.updateVote}/>
+          }
+          </Modal>
+        </div>
+      );
+    }
   }
 
   componentWillMount() {
@@ -90,10 +98,18 @@ class Articles extends Component {
       const { topic } = this.props.match.params;
       if(topic) {
         api.fetchTopicArticles(topic)
-          .then(({ articles }) => this.setState({ articles }))
+          .then(({articles}) => {
+            return this.setState({ articles })
+          })
+          .catch(err => {
+            this.setState({error: {err: true, errCode: err.status, errText: err.statusText}})
+          })
       } else {
         api.fetchArticles()
           .then(({ articles }) => this.setState({ articles }))
+          .catch(err => {
+            this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
+          })
       }
   }
 }

@@ -2,27 +2,42 @@ const DB_URL = 'https://jan-nc-news.herokuapp.com/api';
 
 export const fetchArticles = () => {
   return fetch(`${DB_URL}/articles`)
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) throw res;
+      return res.json()
+    })
 }
 
 export const fetchTopicArticles = (topic) => {
   return fetch(`${DB_URL}/topics/${topic}/articles`)
-    .then(res => res.json())
+    .then(res => {
+      if(res.status !== 200) throw res;
+      else return res.json()
+    })
 }
 
 export const fetchTopics = () => {
   return fetch(`${DB_URL}/topics`)
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) throw res;
+      return res.json()
+    })
 }
 
 export const fetchComments = (articleId) => {
   return fetch(`${DB_URL}/articles/${articleId}/comments`)
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) throw res;
+      return res.json()
+    })
 }
 
 export const fetchUser = (username) => {
   return fetch(`${DB_URL}/users/${username}`)
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) throw res;
+      return res.json()
+    })
 }
 
 export const addComment = (articleId, userId, comment) => {
@@ -37,7 +52,10 @@ export const addComment = (articleId, userId, comment) => {
     },
     body: JSON.stringify(bodyObj)
   })
-  .then(res => res.json())
+    .then(res => {
+      if (res.status !== 201) throw res;
+      return res.json()
+    })
 }
 
 export const addArticle = ({topic, body, title}, userId) => {
@@ -54,7 +72,10 @@ export const addArticle = ({topic, body, title}, userId) => {
     },
     body: JSON.stringify(bodyObj)
   })
-  .then(res => res.json())
+    .then(res => {
+      if (res.status !== 201) throw res;
+      return res.json()
+    })
 }
 
 export const updateVotes = (category, id, vote) => {
@@ -65,7 +86,10 @@ export const updateVotes = (category, id, vote) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(res => res.json())
+    .then(res => {
+      if (res.status !== 201) throw res;
+      return res.json()
+    })
 }
 
 export const deleteComment = (id) => {
@@ -76,5 +100,8 @@ export const deleteComment = (id) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200 || 201) throw res;
+      return res.json()
+    })
 }

@@ -7,7 +7,8 @@ import * as api from '../api'
 
 class ArticleCard extends Component {
   state = {
-    comments: []
+    comments: [],
+    error: {}
   }
   render() {
     return (
@@ -32,6 +33,10 @@ class ArticleCard extends Component {
       .then(({comments}) => {
         this.setState({ comments })
       })
+      .catch(err => {
+        console.log(err)
+        this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
+      })
   }
 
   handleNewComment = (newComment) => {
@@ -45,6 +50,10 @@ class ArticleCard extends Component {
           return oldComment._id !== comment._id
         })
         this.setState({comments: newComments})
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
       })
   }
 }

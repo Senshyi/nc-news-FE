@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import * as api from '../api';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class Topics extends Component {
   state = {
-    topics: []
+    topics: [],
+    error: {}
   }
   render() {
+    if (this.state.error.err) return <Redirect to={{
+      pathname: '/error',
+      state: this.state.error
+    }} />
     return (
       <div className='topics'>
         <Link to='/'><span className='topic'>Home</span></Link>
@@ -20,6 +25,9 @@ class Topics extends Component {
   componentDidMount() {
     api.fetchTopics()
       .then(({topics}) => this.setState({topics}))
+      .catch(err => {
+        this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
+      })
   }
 }
 
