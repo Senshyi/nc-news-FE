@@ -8,10 +8,10 @@ class Topics extends Component {
   }
   render() {
     return (
-      <div>
-        <Link to='/'>Home</Link>
+      <div className='topics'>
+        <Link to='/'><span className='topic'>Home</span></Link>
         {this.state.topics.map((topic, i) => {
-          return <Link key={i} to={`/topics/${topic.slug}`}>{topic.title}</Link>
+          return <Link key={i} to={`/t/${topic.slug}`}><span className='topic'>{topic.title}</span></Link>
         })}
       </div>
     );

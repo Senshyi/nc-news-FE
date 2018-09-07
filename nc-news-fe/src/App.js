@@ -3,8 +3,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Articles from './components/Articles';
 import {Route} from 'react-router-dom';
-import Topics from './components/Topics';
 import * as api from './api'
+import ErrorHandler from './components/ErrorHandler';
 
 class App extends Component {
   state = {
@@ -14,9 +14,9 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Topics />
-        <Route path='/topics/:topic' render={({ match }) => <Articles match={match} loggedUser={this.state.loggedUser} />} />
+        <Route path='/t/:topic' render={({ match }) => <Articles match={match} loggedUser={this.state.loggedUser} />} />
         <Route exact path='/' render={({match}) => <Articles match={match} loggedUser={this.state.loggedUser} />} />
+        <Route path='/error' component={ErrorHandler} />
       </div>
     );
   }

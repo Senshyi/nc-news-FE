@@ -8,9 +8,9 @@ class Votes extends Component {
   render() {
     return (
       <div className='votes-component'>
-        <button onClick={() => this.handleVote('up')}>up</button>
+        <i onClick={() => this.handleVote('up')} className="fas fa-angle-up"></i>
         <span>{this.props.category === 'articles' ? this.props.votes : this.props.votes + this.state.updateVote}</span>
-        <button onClick={() => this.handleVote('down')}>down</button>
+        <i onClick={() => this.handleVote('down')} className="fas fa-angle-down"></i>
       </div>
     );
   }

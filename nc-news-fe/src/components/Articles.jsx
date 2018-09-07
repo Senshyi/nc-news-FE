@@ -4,6 +4,7 @@ import Votes from './Votes'
 import Modal from 'react-modal';
 import * as api from '../api';
 import AddArticle from './AddArticle';
+import Topics from './Topics';
 
 class Articles extends Component {
   state = {
@@ -14,7 +15,8 @@ class Articles extends Component {
   render() {
     return (
       <div className='articles'>
-        <div>
+        <div className='topics-newArticle-div'>
+          <Topics />
           <button onClick={() => this.openModal({})}>Add new Article</button>
         </div>
           {this.state.articles.map((article, i) => {
