@@ -9,7 +9,7 @@ class Votes extends Component {
     return (
       <div className='votes-component'>
         <button onClick={() => this.handleVote('up')}>up</button>
-        <span>{this.props.votes}</span>
+        <span>{this.props.category === 'articles' ? this.props.votes : this.props.votes + this.state.updateVote}</span>
         <button onClick={() => this.handleVote('down')}>down</button>
       </div>
     );
@@ -17,16 +17,14 @@ class Votes extends Component {
 
   handleVote = (vote) => {
     api.updateVotes(this.props.category, this.props.id, vote)
-      .then(_ => {
-          this.setState({
-          updateVote: vote === 'up' ? 1 : -1 
-        }, () => {
-          if (this.props.category === 'articles' && this.props.updateVote) {
-            console.log(this.props.votes + this.state.updateVote, '<<<<<<<<<')
-            this.props.updateVote(this.props.votes + this.state.updateVote, this.props.id)
-          }
-        }) 
-      })
+    this.setState({
+      updateVote: vote === 'up' ? 1 : -1 
+    }, () => {
+      if (this.props.category === 'articles' && this.props.updateVote) {
+        console.log(this.props.votes + this.state.updateVote, '<<<<<<<<<')
+        this.props.updateVote(this.props.votes + this.state.updateVote, this.props.id)
+      }
+    })
   }
 }
 

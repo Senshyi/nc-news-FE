@@ -3,7 +3,7 @@ import * as api from '../api'
 
 class AddComment extends Component {
   state = {
-    newComment: ''
+    newComment: '',
   }
   render() {
     return (
@@ -14,11 +14,6 @@ class AddComment extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   api.fetchUser(this.props.user)
-  //     .then(({ user }) => this.setState({user}))
-  // }
-
   handleInputChange = (e) => {
     e.preventDefault();
 
@@ -28,8 +23,8 @@ class AddComment extends Component {
   }
 
   handleSubmit = () => {
-    console.log(this.props.user)
     api.addComment(this.props.articleId, this.props.user._id, this.state.newComment)
+      .then(({ comment }) => this.props.renderNewComment(comment))
   }
 }
 

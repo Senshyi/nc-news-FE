@@ -33,7 +33,7 @@ class Articles extends Component {
         <Modal isOpen={this.state.modalIsOpen} >
         {
           Object.keys(this.state.selectedArticle).length === 0 ?
-            <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser} /> :
+            <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser}  handlenewArticle={this.handleNewArticleRender}/> :
               <ArticleCard close={this.closeModal} article={this.state.selectedArticle} loggedUser={this.props.loggedUser} updateVote={this.updateVote}/>
         }
         </Modal>
@@ -78,6 +78,11 @@ class Articles extends Component {
     this.setState({
       articles
     })
+  }
+
+  handleNewArticleRender = (newArticle) => {
+    console.log(newArticle);
+    this.setState({ articles: [...this.state.articles, newArticle] })
   }
 
   handleCommentClick = () => {

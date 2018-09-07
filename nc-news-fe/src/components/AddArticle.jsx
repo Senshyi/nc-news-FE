@@ -36,6 +36,10 @@ class AddArticle extends Component {
   
   handleSubmit = () => {
     api.addArticle(this.state.newArticle, this.props.loggedUser._id)
+      .then(({ article }) => {
+        console.log(article)
+        this.props.handlenewArticle(article)
+      })
   }
 
   handleArticle = (e) => {

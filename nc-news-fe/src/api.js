@@ -46,7 +46,7 @@ export const addArticle = ({topic, body, title}, userId) => {
     title,
     created_by: userId
   }
-  fetch(`${DB_URL}/topics/${topic}/articles`, {
+  return fetch(`${DB_URL}/topics/${topic}/articles`, {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -54,11 +54,23 @@ export const addArticle = ({topic, body, title}, userId) => {
     },
     body: JSON.stringify(bodyObj)
   })
+  .then(res => res.json())
 }
 
 export const updateVotes = (category, id, vote) => {
   return fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
     method: 'put',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+}
+
+export const deleteComment = (id) => {
+  return fetch(`${DB_URL}/comments/${id}`, {
+    method: 'delete',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
