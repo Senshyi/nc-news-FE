@@ -5,7 +5,8 @@ import Modal from 'react-modal';
 import * as api from '../api';
 import AddArticle from './AddArticle';
 import Topics from './Topics';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 
 class Articles extends Component {
   state = {
@@ -32,10 +33,18 @@ class Articles extends Component {
                 <Votes votes={article.votes} id={article._id} category={'articles'} updateVote={this.updateVote}/>
               </div>
               <div className='article-preview' onClick={() => this.openModal(article)}>
-                <h3>{article.title}</h3>
-                <p>{article.belongs_to}</p>
-                <p>{article.topic}</p>
-                <p onClick={this.handleCommentClick}>{article.comments}</p>
+                <div className='article-preview-header'>
+                  <h3>{article.title}</h3>
+                  <span>{moment(article.created_at).format('LT ll')}</span>
+                </div>
+                <div className='article-preview-body'>
+                  <p className='article-preview-body-topic'>Topic: {article.topic}</p>
+                  <p>Author: {article.belongs_to}</p>
+                </div>
+                <div className='article-preview-body-comments'>
+                  <p>{article.comments}<i className="fas fa-comment-alt"></i></p>
+                </div>
+                
               </div>
             </div>
             })}
