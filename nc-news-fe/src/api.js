@@ -87,7 +87,7 @@ export const updateVotes = (category, id, vote) => {
     }
   })
     .then(res => {
-      if (res.status !== 201) throw res;
+      if (res.status !== 200) throw res;
       return res.json()
     })
 }
@@ -101,7 +101,7 @@ export const deleteComment = (id) => {
     }
   })
     .then(res => {
-      if (res.status !== 200 || 201) throw res;
+      if (res.status !== 200) throw res;
       return res.json()
     })
 }
