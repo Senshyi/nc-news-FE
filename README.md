@@ -1,7 +1,7 @@
 # NC-NEWS-FE
-[NC-NEWS](https://jan-nc-news.herokuapp.com/api) is a front-end application built for serving articles
+[NC-NEWS](https://jan-nc-news.netlify.com/) is a front-end application built for serving articles
 
-See the deployed version [here](https://jan-nc-news.herokuapp.com/api)
+See the deployed version [here](https://jan-nc-news.netlify.com/)
 
 See the back-end [here](https://github.com/JanMach97/BE2-northcoders-news)
 
