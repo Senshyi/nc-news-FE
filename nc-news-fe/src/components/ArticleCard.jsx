@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import AddComment from './AddComment'
 import Comments from './Comments';
 import Votes from './Votes';
-import * as api from '../api'
+import * as api from '../api';
 
 
 class ArticleCard extends Component {
@@ -12,15 +13,16 @@ class ArticleCard extends Component {
   }
   render() {
     return (
-      <div>
-        <span onClick={this.props.close}>X</span>
-        <div className='signle-article-votes'>
+      <div className='single-article-card'>
+        <div className='single-article-votes'>
+        <span className='single-article-close-span' onClick={this.props.close}>X</span>
           <Votes votes={this.props.article.votes} id={this.props.article._id} category={'articles'} updateVote={this.props.updateVote} />
         </div>
-        <h1>{this.props.article.title}</h1>
-        <p>{this.props.article.topic}</p>
-        <p>{this.props.article.belongs_to}</p>
-        <p>{this.props.article.body}</p>
+        <h2>{this.props.article.title}</h2>
+        <p className='article-preview-body-topic'>Topic: {this.props.article.topic}</p>
+        <p className='single-article-card-author'>Author: {this.props.article.belongs_to}</p>
+        <span className='single-article-card-timestamp'>{moment(this.props.article.created_at).format('LT ll')}</span>
+        <p className='single-article-card-body'>{this.props.article.body}</p>
         <AddComment user={this.props.loggedUser} articleId={this.props.article._id} renderNewComment={this.handleNewComment}/>
         <h3>Comments:</h3>
         <Comments comments={this.state.comments} user={this.props.loggedUser} removeComment={this.handleCommentDelete}/>

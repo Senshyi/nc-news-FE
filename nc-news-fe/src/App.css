@@ -126,11 +126,6 @@ a, .topic  {
   border-right: 1px solid black;
 }
 
-.single-comment {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid black;
-}
 
 .navbar {
   background-color: rgb(255,255,255);
@@ -303,7 +298,122 @@ select {
 
 /* ARTICLE CARD */
 
+.single-article-votes {
+  float: right;
+}
 
+.single-article-votes .votes-component {
+  text-align: center;
+  margin-top: 15px;
+
+}
+
+.single-article-close-span {
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 2px;
+}
+
+.single-article-card  h2{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.single-article-card-author {
+  font-size: 12px;
+  color: rgba(0,0,0, 0.6)
+}
+
+.single-article-card-timestamp {
+  font-size: 14px;
+  color: rgba(0,0,0, 0.6);
+}
+
+.single-article-card-body {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.new-comment {
+  width: 50%;
+  margin-bottom: 12px;
+  height: 40px;
+  display: flex;
+
+}
+
+.new-comment input {
+  width: 50%;
+  height: 30px;
+  font-size: 15px;
+}
+
+.new-comment button {
+  height: 34px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  text-transform: uppercase;
+  background-color: rgb(0, 121, 211);
+  color: rgb(255, 255, 255);
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  padding: 3px 16px;
+  border-color: rgb(0, 121, 211);
+  cursor: pointer;
+}
+
+
+/* COMMENTS */
+
+.comments-container {
+  margin: 15px 1%;
+}
+
+.single-comment {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204, 204, 204);
+  border-image: initial;
+  margin-bottom: -1px;
+  z-index: 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.comment-body {
+  margin: 0 5px;
+}
+
+.single-comment-votes {
+  width: 70px;
+}
+
+.comment-body-head {
+  display: flex;
+  font-size: 14px;
+  color: rgba(0,0,0, 0.6);
+  margin-bottom: 3px;
+}
+
+.comment-body-head p {
+  margin-right: 10px;
+}
+
+.delete i{
+  color: red;
+  font-size: 16px;
+}
+
+.delete {
+  cursor: pointer;
+}
 
 a {
   color: inherit;

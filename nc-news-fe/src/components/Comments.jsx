@@ -1,19 +1,22 @@
 import React from 'react';
 import Votes from './Votes';
+import moment from 'moment';
 
 const Comments = ({ comments, user, removeComment}) => {
   return (
-    <div>
+    <div className='comments-container'>
       {comments.map((comment, i) => {
         return <div className='single-comment' key={i}>
-          <div className='comment-votes'>
+          <div className='single-comment-votes'>
             <Votes votes={comment.votes} id={comment._id} category={'comments'} />
           </div>
-          <div>
-            <p>{comment.created_by.username}</p>
-            <p>timestamp</p>
+          <div className='comment-body'>
+            <div className='comment-body-head'>
+              <p>Author: {comment.created_by.username}</p>
+              <span>{moment(comment.created_at).format('LT ll')}</span> 
+            </div>
             <p>{comment.body}</p>
-            {user._id === comment.created_by._id && <span onClick={() => removeComment(comment._id)}>delete</span>}
+            {user._id === comment.created_by._id && <span className='delete' onClick={() => removeComment(comment._id)}><i className="fas fa-trash"></i></span>}
           </div>
         </div>
       })}

@@ -8,7 +8,7 @@ class AddComment extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='new-comment'>
         <input type="text" value={this.state.newComment} onChange={this.handleInputChange} placeholder='Enter comment...'/>
         <button type='button' onClick={this.handleSubmit}>Send Comment</button>
       </div>
