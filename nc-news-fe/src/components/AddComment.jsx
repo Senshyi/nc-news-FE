@@ -27,7 +27,6 @@ class AddComment extends Component {
     api.addComment(this.props.articleId, this.props.user._id, this.state.newComment)
       .then(({ comment }) => this.props.renderNewComment(comment))
       .catch(err => {
-        console.log(err)
         this.setState({ error: { err: true, errCode: err.status, errText: err.statusText }})
       })
   }

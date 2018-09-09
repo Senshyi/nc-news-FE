@@ -8,6 +8,15 @@ import Topics from './Topics';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
+const customStyles = {
+  content: {
+    top: '10%',
+    left: '15%',
+    right: '15%',
+    bottom: '5%'
+  }
+};
+
 class Articles extends Component {
   state = {
     articles: [],
@@ -48,7 +57,10 @@ class Articles extends Component {
               </div>
             </div>
             })}
-          <Modal isOpen={this.state.modalIsOpen} >
+          <Modal 
+            isOpen={this.state.modalIsOpen}
+            style={customStyles}
+          >
           {
             Object.keys(this.state.selectedArticle).length === 0 ?
               <AddArticle close={this.closeModal} topic={this.props.match.params.topic} loggedUser={this.props.loggedUser}  handlenewArticle={this.handleNewArticleRender}/> :
