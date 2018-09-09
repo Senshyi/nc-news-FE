@@ -30,7 +30,7 @@ Start React appliacation:
 npm start
 ```
 
-##Deployment
+## Deployment
 
 This project is hosted on [Netlify](https://www.netlify.com/)
 
