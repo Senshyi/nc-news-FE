@@ -111,7 +111,6 @@ class Articles extends Component {
   }
 
   handleNewArticleRender = (newArticle) => {
-    console.log(newArticle);
     this.setState({ articles: [...this.state.articles, newArticle] })
   }
 

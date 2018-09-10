@@ -21,7 +21,6 @@ class Votes extends Component {
       updateVote: vote === 'up' ? 1 : -1 
     }, () => {
       if (this.props.category === 'articles' && this.props.updateVote) {
-        console.log(this.props.votes + this.state.updateVote, '<<<<<<<<<')
         this.props.updateVote(this.props.votes + this.state.updateVote, this.props.id)
       }
     })

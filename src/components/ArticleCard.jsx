@@ -36,7 +36,6 @@ class ArticleCard extends Component {
         this.setState({ comments })
       })
       .catch(err => {
-        console.log(err)
         this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
       })
   }
@@ -54,7 +53,6 @@ class ArticleCard extends Component {
         this.setState({comments: newComments})
       })
       .catch(err => {
-        console.log(err)
         this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
       })
   }
