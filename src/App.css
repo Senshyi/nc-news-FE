@@ -371,7 +371,8 @@ select {
 /* COMMENTS */
 
 .comments-container {
-  margin: 15px 1%;
+  width: 100%;
+  padding: 5px;
 }
 
 .single-comment {
@@ -388,11 +389,21 @@ select {
 }
 
 .comment-body {
-  margin: 0 5px;
+  padding: 5px;
 }
 
-.single-comment-votes {
-  width: 70px;
+.single-comment:hover {
+  z-index: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(137, 137, 137);
+  border-image: initial;
+}
+
+.single-comment-votes .votes-component{
+  width: 40px;
+  text-align: center;
+  border-right: 1px solid rgb(204, 204, 204);
 }
 
 .comment-body-head {
