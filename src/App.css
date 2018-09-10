@@ -367,6 +367,10 @@ select {
   cursor: pointer;
 }
 
+.new-comment button:hover {
+  background-color: rgb(4, 113, 195)
+} 
+
 
 /* COMMENTS */
 
