@@ -400,6 +400,11 @@ select {
   border-image: initial;
 }
 
+.single-comment-votes {
+  display: flex;
+  align-items: center;
+}
+
 .single-comment-votes .votes-component{
   width: 40px;
   text-align: center;
