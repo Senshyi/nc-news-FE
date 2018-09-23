@@ -111,7 +111,7 @@ class Articles extends Component {
   }
 
   handleNewArticleRender = (newArticle) => {
-    this.setState({ articles: [...this.state.articles, newArticle] })
+    this.setState({ articles: [newArticle, ...this.state.articles] })
   }
 
   fetchArticles = () => {
