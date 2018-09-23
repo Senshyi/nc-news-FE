@@ -119,14 +119,16 @@ class Articles extends Component {
       if(topic) {
         api.fetchTopicArticles(topic)
           .then(({articles}) => {
-            return this.setState({ articles })
+            return this.setState({
+              articles: articles.sort((a, b) => a.created_at < b.created_at ? 1 : -1)
+            })
           })
           .catch(err => {
             this.setState({error: {err: true, errCode: err.status, errText: err.statusText}})
           })
       } else {
         api.fetchArticles()
-          .then(({ articles }) => this.setState({ articles }))
+          .then(({ articles }) => this.setState({ articles: articles.sort((a, b) => a.created_at < b.created_at ? 1 : -1) }))
           .catch(err => {
             this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
           })
