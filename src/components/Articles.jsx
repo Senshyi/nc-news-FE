@@ -29,6 +29,17 @@ class Articles extends Component {
       pathname: '/error',
       state: this.state.error
     }} />
+    else if(this.state.articles.length === 0) {
+      return (
+      <div className='loading-circle'>
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>)
+    }
     else {
       return (
         <div className='articles'>
