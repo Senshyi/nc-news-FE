@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .articles {
   margin: 0 10% 5% 10%;
 }
@@ -22,6 +18,8 @@
 .article-preview-header {
   display: flex;
 }
+
+
 .article-preview-header span {
   margin-left: auto;
   color: rgba(0, 0,0, 0.4);
@@ -194,17 +192,17 @@ select:focus {outline:0;}
   display: flex;
   align-items: center;
   text-align: center;
-  border: 1px solid rgb(137, 137, 137);
+  border: 1px solid rgb(204, 204, 204);
   border-bottom: none;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
   color: inherit;
   text-decoration: none;
   height: 35px;
 } 
 
 .topics a:hover {
-  transform: scale(1.05)
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -442,4 +440,8 @@ a {
 
 i {
   font-size: 1.5rem;
+}
+
+span {
+  text-align: center;
 }
