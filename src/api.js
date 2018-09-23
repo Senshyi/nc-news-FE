@@ -78,18 +78,40 @@ export const addArticle = ({topic, body, title}, userId) => {
     })
 }
 
-export const updateVotes = (category, id, vote) => {
-  return fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
-    method: 'put',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => {
-      if (res.status !== 200) throw res;
-      return res.json()
+export const updateVotes = (category, id, vote, multicall) => {
+  if(multicall) {
+    Promise.all([fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }), fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })])
+    .then(([res1, res2]) => {
+      if (res2.status !== 200) throw res2;
+      return res2.json()
+    }) 
+  } else {
+    fetch(`${DB_URL}/${category}/${id}?vote=${vote}`, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
+      .then(res => {
+        if (res.status !== 200) throw res;
+        return res.json()
+      })
+    } 
+      
+
 }
 
 export const deleteComment = (id) => {
