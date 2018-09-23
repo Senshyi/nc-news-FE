@@ -7,6 +7,7 @@ import AddArticle from './AddArticle';
 import Topics from './Topics';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+import MediaQuery from 'react-responsive';
 
 const customStyles = {
   content: {
@@ -43,10 +44,25 @@ class Articles extends Component {
     else {
       return (
         <div className='articles'>
-          <div className='topics-newArticle-div'>
-            <Topics />
-            <button onClick={() => this.openModal({})}>Add new Article</button>
-          </div>
+          
+          <MediaQuery maxWidth={700}>
+            {(matches) => {
+              if (matches) {
+                return <div className='mobile-view'>
+                  <button onClick={() => this.openModal({})}>Add new Article</button>
+                  <div className='topics-newArticle-div'>
+                  <Topics />
+                </div>
+                </div>
+                
+              } else {
+                return <div className='topics-newArticle-div'>
+                          <Topics />
+                          <button onClick={() => this.openModal({})}>Add new Article</button>
+                       </div>
+              }
+            }}
+          </MediaQuery>
             {this.state.articles.map((article, i) => {
             return <div className='single-article' key={i}>
               <div className='article-votes-card'>
