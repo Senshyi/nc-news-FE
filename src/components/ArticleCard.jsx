@@ -33,7 +33,7 @@ class ArticleCard extends Component {
   componentDidMount() {
     api.fetchComments(this.props.article._id)
       .then(({comments}) => {
-        this.setState({ comments })
+        this.setState({ comments: comments.sort((a, b) => a.created_at < b.created_at ? 1 : -1) })
       })
       .catch(err => {
         this.setState({ error: { err: true, errCode: err.status, errText: err.statusText } })
@@ -41,7 +41,7 @@ class ArticleCard extends Component {
   }
 
   handleNewComment = (newComment) => {
-    this.setState({comments: [...this.state.comments, newComment] })
+    this.setState({ comments: [newComment ,...this.state.comments] })
   }
 
   handleCommentDelete = (id) => {
