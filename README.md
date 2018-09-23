@@ -37,3 +37,10 @@ This project is hosted on [Netlify](https://www.netlify.com/)
 ## Build with
 
 - React - 16.4.2 
+- React Router - 4.3.1
+- React Modal - 3.5.1
+
+
+## Author
+
+[Jan Machacek](https://github.com/JanMach97)
