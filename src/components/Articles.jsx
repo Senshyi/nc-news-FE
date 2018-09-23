@@ -77,12 +77,12 @@ class Articles extends Component {
   }
 
   componentDidMount = () => {
-    this.handleFetchArticles()
+    this.fetchArticles()
   }
 
   componentDidUpdate = (prevProps) => {
     if(prevProps !== this.props) {
-      this.handleFetchArticles()
+      this.fetchArticles()
     }
   }
 
@@ -114,7 +114,7 @@ class Articles extends Component {
     this.setState({ articles: [...this.state.articles, newArticle] })
   }
 
-  handleFetchArticles = () => {
+  fetchArticles = () => {
       const { topic } = this.props.match.params;
       if(topic) {
         api.fetchTopicArticles(topic)
