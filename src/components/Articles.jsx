@@ -71,6 +71,8 @@ class Articles extends Component {
           <Modal 
             isOpen={this.state.modalIsOpen}
             style={customStyles}
+            shouldCloseOnOverlayClick={true}
+            onRequestClose={this.closeModal}
           >
           {
             Object.keys(this.state.selectedArticle).length === 0 ?
